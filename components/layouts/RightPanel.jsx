@@ -1,4 +1,3 @@
-
 import Chart from "@/components/layouts/LineChart";
 import { CardDate } from "@/components/ui/CardDate";
 
@@ -40,22 +39,24 @@ const dataSet = [
   },
 ];
 
-export const RightPanel = ({ forecast }) => {
-    return         <div className="col-span-2 flex flex-col justify-center gap-4 my-12">
-    {/* Titre */}
-    <p className="text-xl text-gray-600">Température</p>
+export const RightPanel = ({ lon, lat }) => {
+  return (
+    <div className="col-span-2 flex flex-col justify-center gap-4 my-12">
+      {/* Titre */}
+      <p className="text-xl text-gray-600">Température</p>
 
-    {/* Chart */}
-    <Chart data={dataSet} />
+      {/* Chart */}
+      <Chart data={dataSet} />
 
-    {/* GRID */}
-    <div className="grid grid-cols-4 gap-2">
-      <CardDate date={"Today"} active>
-        30
-      </CardDate>
-      <CardDate date={"Tomorrow"}>40</CardDate>
-      <CardDate date={"29th November"}>30</CardDate>
-      <CardDate date={"30th November"}>30</CardDate>
+      {/* GRID */}
+      <div className="grid grid-cols-4 gap-2">
+        <CardDate date={"Today"} active>
+          30
+        </CardDate>
+        <CardDate date={"Tomorrow"}>40</CardDate>
+        <CardDate date={"29th November"}>30</CardDate>
+        <CardDate date={"30th November"}>30</CardDate>
+      </div>
     </div>
-  </div>
-}
+  );
+};
