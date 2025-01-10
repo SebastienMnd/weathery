@@ -31,7 +31,7 @@ const Page = () => {
   return (
     <div className="bg-white h-4/5 w-4/5 p-4 rounded-lg flex flex-col gap-4 shadow-lg">
       {/* TITLE */}
-      <div className="flex items-center justify-between rounded-lg border group">
+      <div className="flex items-center justify-between rounded-lg border overflow-hidden min-h-10">
         <input
           type="text"
           placeholder="Entrez votre ville"
@@ -39,8 +39,11 @@ const Page = () => {
           value={locationInput}
           onChange={(e) => setLocationInput(e.target.value)}
         />
-        <button onClick={() => changeLocation()} className="px-2 py-1 bg-blue-500 uppercase text-white rounded-r">
-          <RefreshCw className="p-0.5" />
+        <button
+          onClick={() => changeLocation()}
+          className="px-2 py-1 h-full min-w-12 bg-blue-500 uppercase text-white flex justify-center items-center"
+        >
+          <RefreshCw />
         </button>
       </div>
 
