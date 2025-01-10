@@ -18,7 +18,8 @@ const Page = () => {
   const changeLocation = () => {
     getGeoCode({ location: locationInput }).then((data) => {
       if (data.length > 0) {
-        setLocation(data[0].name);
+        console.log("Location : ", data[0]);
+        setLocation(data[0]);
         setLocationInput(data[0].name);
       } else {
         setLocationInput("");
@@ -28,7 +29,7 @@ const Page = () => {
 
   // Render
   return (
-    <div className="bg-white h-4/5 w-4/5 p-4 rounded-lg flex flex-col gap-4">
+    <div className="bg-white h-4/5 w-4/5 p-4 rounded-lg flex flex-col gap-4 shadow-lg">
       {/* TITLE */}
       <div className="flex items-center justify-between rounded-lg border group">
         <input
@@ -45,7 +46,7 @@ const Page = () => {
 
       <div className="grid grid-cols-3 h-full">
         <LeftPanel location={location} />
-        <RightPanel />
+        <RightPanel location={location} />
       </div>
     </div>
   );

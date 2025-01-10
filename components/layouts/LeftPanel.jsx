@@ -2,12 +2,11 @@
 
 import { useEffect, useState } from "react";
 
-import { WeatherIcon } from "@/components/ui/Icon";
-
 import { dateFormat } from "@/lib/utils";
 import { getWeather } from "@/actions/server";
+import Image from "next/image";
 
-export const LeftPanel = ({ location = "Pay" }) => {
+export const LeftPanel = ({ location = "" }) => {
   // Constants
   const [loading, setLoading] = useState(true);
   const [weatherData, setWeatherData] = useState({});
@@ -16,7 +15,7 @@ export const LeftPanel = ({ location = "Pay" }) => {
   useEffect(() => {
     if (location === "") return;
     setLoading(true);
-    getWeather({ location: location }).then((data) => {
+    getWeather({ location: location.name }).then((data) => {
       setWeatherData(data);
       setLoading(false);
     });
@@ -29,20 +28,23 @@ export const LeftPanel = ({ location = "Pay" }) => {
   return (
     <div className="col-span-1 flex flex-col items-center justify-center gap-12 my-12">
       <p className="text-xl text-gray-600 text-center">
-        {location} <br />
+        {location.name} <br />
         {new Date().toLocaleString("fr-FR", dateFormat)}
       </p>
       <div className="flex-grow flex flex-col items-center justify-center">
-        <p className="flex items-center justify-center gap-7 text-6xl font-bold">
-          <WeatherIcon
-            icon={weatherData.weather[0].main.toLowerCase()}
-            size={64}
-          />
+        <div className="flex items-center justify-center gap-7 text-6xl font-bold">
+          <div className="w-32 h-32 flex items-center justify-center relative">
+            <Image
+              src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
+              fill
+              alt={weatherData.weather[0].description}
+            />
+          </div>
           {Intl.NumberFormat("fr-FR", {
             style: "unit",
             unit: "celsius",
           }).format(weatherData.main.temp)}
-        </p>
+        </div>
         <p className="text-6xl font-bold capitalize">
           {weatherData.weather[0].description}
         </p>
